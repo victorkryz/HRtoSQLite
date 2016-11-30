@@ -11,7 +11,7 @@
 
 
 #ifdef _WIN32
-	ConnectionRequisites glConnReqs{ "//localhost:1521/xe", "hr", "hr" };
+	UnitTestParameters glTestParams{ "//localhost:1521/xe", "hr", "hr" };
 #else
 	UnitTestParameters glTestParams{ "//192.168.1.35:1521/xe", "hr", "hr" };
 #endif // _WIN32

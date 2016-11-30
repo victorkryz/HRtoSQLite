@@ -4,22 +4,21 @@ project(HRtoSQLite)
 #set(CMAKE_VERBOSE_MAKEFILE on)
 #------------------------------------------------------
 
-set(VENDOR_DIR      "/home/victor/wp/ClionProjects/vendor")
 set(CURRENT_DIR      "${CMAKE_CURRENT_SOURCE_DIR}")
 set(SOURCE_FILES_DIR "${CURRENT_DIR}/src")
 
 # set OCI and Poco libs paths:
 #--------------------------------------------------------
-set(OCI_INC_DIR      "/usr/include/oracle/12.1/client64")
-set(OCI_LIB_DIR      "/usr/lib/oracle/12.1/client64/lib")
-set(POCO_INC_DIR     "${VENDOR_DIR}/poco/include")
-set(POCO_LIB_DIR     "${VENDOR_DIR}/poco/lib")
+#set(OCI_INC_DIR      "/usr/include/oracle/12.1/client64")
+#set(OCI_LIB_DIR      "/usr/lib/oracle/12.1/client64/lib")
+#set(POCO_INC_DIR     "${POCO_BASE}/poco/include")
+#set(POCO_LIB_DIR     "${POCO_BASE}/poco/lib")
 #---------------------------------------------------------
 
 
 function(check_vars var)
     if(NOT DEFINED ${var} )
-        message(FATAL_ERROR "${var} is not defined!")
+        message(FATAL_ERROR "${var} variable is not defined!")
      endif()
 endfunction(check_vars)
 
