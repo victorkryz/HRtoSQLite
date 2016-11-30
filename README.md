@@ -30,9 +30,7 @@ HRtoSQLite utility transfers Oracle Database sample HR schema's data into SQLite
   - CMake configuration files and tool;
   - IDE: CLion (for Linux), Visual Studio 2015 (for Windows);
 
-  Google Test, Google's C++ test framework!
-
-
+  
  #### Command line arguments:
 
 ```
