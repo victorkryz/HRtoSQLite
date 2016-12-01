@@ -34,6 +34,13 @@ tests=( "$exit_item"
 	)
 
 
+ask_user_to_continue()
+{
+	echo "Press eny key to continue..."
+	read -n 1
+}
+
+
 continue=1
 
 while [ "$continue" == 1 ];
@@ -42,23 +49,28 @@ do
 
         for (( i=0; i<sz; i++ ));
         do
-           # echo "    " $((${i}+1)). ${CGREEN} ${tests[${i}]}${CNC}
-            echo -e "    " $((${i}+1)). ${CTestName} ${tests[${i}]}${CNc}
+         	echo -e "    " $((${i}+1)). ${CTestName} ${tests[${i}]}${CNc}
         done
 
         echo "Select test (action) you'd like to launch (print an order and press enter):"
         read test_order
 
-        selected_test=${tests[$((${test_order}-1))]}
-        echo Selected action: ${selected_test}:
+		if (( $test_order > $sz ));
+		then
+			echo "${test_order} - invalid order! (try again)."
+			ask_user_to_continue
+		else
+			selected_test=${tests[$(($test_order-1))]}
+			echo Selected action: ${selected_test}:
 
-        if [ "$selected_test" = "$exit_item" ];
-         then
-            continue=0
-        else
-           ./startSingleTest.sh ${selected_test}
-           echo -e "Press eny key to continue..."
-           read -n 1
-        fi
+			if [ "$selected_test" = "$exit_item" ];
+			then
+				continue=0
+			else
+				./startSingleTest.sh $selected_test
+				ask_user_to_continue
+			fi
+		fi	
 done
+
 
