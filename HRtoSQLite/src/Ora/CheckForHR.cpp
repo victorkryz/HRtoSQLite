@@ -35,7 +35,7 @@ bool checkCurentSchemaForHR(const Ora::ConnectionSp& spConn)
             Ora::stmtExec(spConn, strStmt, false);
             bIsHRSchema = true;
     }
-    catch (const Ora::Exception &e) {
+    catch (const Ora::Exception &) {
     }
 
     return bIsHRSchema;
