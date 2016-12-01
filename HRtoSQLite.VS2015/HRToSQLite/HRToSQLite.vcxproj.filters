@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Ora">
+      <UniqueIdentifier>{c7ae6a2e-9f42-4ea3-880a-0a762348ec1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Sqlt">
+      <UniqueIdentifier>{7ea44973-fbe6-49c2-9405-c064d9e6250c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Ora">
+      <UniqueIdentifier>{03b2f1ec-abca-49bf-b002-cec0ee21f7d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sqlt">
+      <UniqueIdentifier>{5aa7617f-e5f6-4dea-b930-b8d9a1a3987a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\HRtoSQLite\src\ExportProcessImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HRtoSQLite\src\Interfaces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HRtoSQLite\src\Common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HRtoSQLite\src\HRtoSQLiteApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HRtoSQLite\src\Sqlt\StmtFileParser.h">
+      <Filter>Header Files\Sqlt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HRtoSQLite\src\Sqlt\Transformation.h">
+      <Filter>Header Files\Sqlt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HRtoSQLite\src\Ora\Connection.h">
+      <Filter>Header Files\Ora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HRtoSQLite\src\Ora\Describer.h">
+      <Filter>Header Files\Ora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HRtoSQLite\src\Ora\Reader.h">
+      <Filter>Header Files\Ora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HRtoSQLite\src\Ora\Rowset.h">
+      <Filter>Header Files\Ora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HRtoSQLite\src\Ora\Selector.h">
+      <Filter>Header Files\Ora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HRtoSQLite\src\Ora\Utils.h">
+      <Filter>Header Files\Ora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HRtoSQLite\src\Ora\Types.h">
+      <Filter>Header Files\Ora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HRtoSQLite\src\Ora\ocihwp.h">
+      <Filter>Header Files\Ora</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HRtoSQLite\src\TableExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HRtoSQLite\src\Sqlt\DbsWriter.h">
+      <Filter>Header Files\Sqlt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\HRtoSQLite\src\BreakingHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\HRtoSQLite\src\HRtoSQLiteApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\HRtoSQLite\src\Sqlt\StmtFileParser.cpp">
+      <Filter>Source Files\Sqlt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\HRtoSQLite\src\Sqlt\Transformation.cpp">
+      <Filter>Source Files\Sqlt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\HRtoSQLite\src\Ora\Connection.cpp">
+      <Filter>Source Files\Ora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\HRtoSQLite\src\Ora\Rowset.cpp">
+      <Filter>Source Files\Ora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\HRtoSQLite\src\Ora\Selector.cpp">
+      <Filter>Source Files\Ora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\HRtoSQLite\src\Ora\Reader.cpp">
+      <Filter>Source Files\Ora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\HRtoSQLite\src\TableExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\HRtoSQLite\src\BreakingHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\HRtoSQLite\src\Sqlt\DbsWriter.cpp">
+      <Filter>Source Files\Sqlt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\HRtoSQLite\src\ExportrProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\HRtoSQLite\src\Ora\CheckForHR.cpp">
+      <Filter>Source Files\Ora</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\HRtoSQLite\src\Ora\Describer.cpp">
+      <Filter>Source Files\Ora</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
