@@ -72,8 +72,6 @@ HRtoSQLite_run -C//oracle_host/xe -N hr -P hr -S./../sql/hrSQLiteDDL.sql -O./../
     - go into file HRtoSQLite_tests/g.tests/CMakeLists.txt and set google test paths in variables:   
       *GTEST_INC_DIR, GTEST_LIB_DIR*
 
-    Build the subprojects: '*HRtoSQLite*' (static library), '*HRtoSQLite_run*' 
-
     In case you use CLion IDE, open project root directory to explore all projects' structure, build them and run.
    
     *To build it without IDE, using only CMake CLI, do steps like below:*  
