@@ -9,7 +9,7 @@ HRtoSQLite utility transfers Oracle Database sample HR schema's data into SQLite
 - Make it cross-platform (Windows/Linux OS).
  
  
- #### Features:
+#### Features:
  
  - Oracle call interface (OCI) is used to Oracle acces;
  - Poco features:
@@ -32,7 +32,7 @@ HRtoSQLite utility transfers Oracle Database sample HR schema's data into SQLite
 ### Usage:
 -------------------------------------------------------------------------
 
- #### Command line arguments:
+#### Command line arguments:
 
 ```
 -h, --help                      display help information on command line arguments  
