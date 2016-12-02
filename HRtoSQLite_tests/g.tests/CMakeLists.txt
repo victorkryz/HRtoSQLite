@@ -1,14 +1,12 @@
 
 #set(CMAKE_VERBOSE_MAKEFILE on)
 
-set(VENDOR_DIR  "/home/victor/wp/ClionProjects/vendor")
-
 set(CURRENT_DIR      "${CMAKE_CURRENT_SOURCE_DIR}")
 set(SOURCE_FILES_DIR "${CURRENT_DIR}/src")
 
 # set Google test pathes:
-set(GTEST_INC_DIR  "${VENDOR_DIR}/googletest-1.7.0/googletest/include")
-set(GTEST_LIB_DIR  "${VENDOR_DIR}/googletest-1.7.0/googletest")
+#set(GTEST_INC_DIR  "")
+#set(GTEST_LIB_DIR  "")
 
 
 set(GTEST_LIBS ${GTEST_LIB_DIR}/libgtest.a #[[${GTEST_LIB_DIR}/libgtest_main.a]])

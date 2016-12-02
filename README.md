@@ -64,7 +64,8 @@ HRtoSQLite_run -C//oracle_host/xe -N hr -P hr -S./../sql/hrSQLiteDDL.sql -O./../
 
 - #### For linux:
 
-    The project building is based on CMake configuration files and built with CMake tool.  
+    The project building is based on CMake configuration files.   
+    Set the next variables that define headers and libraries directories:  
     
     - go into file HRtoSQLite/CMakeLists.txt and set OCI and Poco paths in variables:  
       *OCI_INC_DIR, OCI_LIB_DIR, POCO_INC_DIR, POCO_LIB_DIR*;
@@ -103,6 +104,7 @@ HRtoSQLite_run -C//oracle_host/xe -N hr -P hr -S./../sql/hrSQLiteDDL.sql -O./../
 
 ### Testing:
 -------------------------------------------------------------------------
+
 To get the unit tests runnable, build the subproject *HRtoSQLite_tests*.  
 There are provided a set of tests for Oracle connection, reading 'HR' schema tables, writing data into SQLite database, e.g.
 
