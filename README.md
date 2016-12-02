@@ -88,7 +88,7 @@ HRtoSQLite_run -C//oracle_host/xe -N hr -P hr -S./../sql/hrSQLiteDDL.sql -O./../
 
     -go into directory HRtoSQLite.VS2015 and open HRToSQLiteWS.sln solution;
 
-        Projects sesttings suppose the next default pathes configuration.   
+        Projects sesttings suppose the next default headers and libraries directories configuration:   
 
         ..\..\..\vendor\instantclient_12_1\sdk\include  - OCI headers
         ..\..\..\vendor\poco-1.7.4\include              - POCO headers
@@ -104,24 +104,24 @@ HRtoSQLite_run -C//oracle_host/xe -N hr -P hr -S./../sql/hrSQLiteDDL.sql -O./../
 ### Testing:
 -------------------------------------------------------------------------
 
-To get the unit tests runnable, build the subproject *HRtoSQLite_tests*.  
-There are provided a set of tests for Oracle connection, reading 'HR' schema tables, writing data into SQLite database, e.g.
+    To get the unit tests runnable, build the subproject *HRtoSQLite_tests*.  
+    There are provided a set of tests for Oracle connection, reading 'HR' schema tables, writing data into SQLite database, e.g.
 
-The tests are parametrized by environment variables:
+    The tests are parametrized by environment variables:
 
-```
-ORA_CONN_STR   Oracle connection string
-ORA_NAME       Oracle user name
-ORA_PSW        Oracle user password 
-SQLT_DDL       HR-SQLite database structure initialization file
-OUTPUT         SQLite database file (default: ./hr.db)
-```
+    ```
+    ORA_CONN_STR   Oracle connection string
+    ORA_NAME       Oracle user name
+    ORA_PSW        Oracle user password 
+    SQLT_DDL       HR-SQLite database structure initialization file
+    OUTPUT         SQLite database file (default: ./hr.db)
+    ```
 
-Directory 'Launchers' contains some configuration and scripts to help test launching.  
-To launch unit tests from command line, setup variables in *'config.env'* file and launch *'testLauncher'* script.
+    Directory 'Launchers' contains some configuration and scripts to help test launching.  
+    To launch unit tests from command line, setup variables in *'config.env'* file and launch *'testLauncher'* script.
 
-**Warning:** in case these tests are launched under from IDE (CLion, VS 2015), setup the given environment 
-variables in the respective configuration (debug/run) before debugging or running some test(s)!  
+    **Warning:** in case these tests are launched under from IDE (CLion, VS 2015), setup the given environment 
+    variables in the respective configuration (debug/run) before debugging or running some test(s)!  
 
 
 -------------------------------------------------------------------------
