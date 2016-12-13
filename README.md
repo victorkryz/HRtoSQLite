@@ -58,7 +58,7 @@ HRtoSQLite_run -C//oracle_host/xe -N hr -P hr -S./../sql/hrSQLiteDDL.sql -O./../
 
 - Download and install [*Oracle Instant Client (Package - SDK)*](http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html)
 - Download and build [*Poco C++ libraries*](https://pocoproject.org/download/)
-- Download [*Google's C++ test framework*](https://github.com/google/googletest) 
+- Download and build [*Google's C++ test framework*](https://github.com/google/googletest) ([*read build instructions*](https://github.com/google/googletest/blob/master/googletest/README.md)) 
 
  *(On the development phase, there's used POCO version 1.7.4, Oracle client 12.1, googletest-1.7.0)*
 
@@ -124,7 +124,10 @@ variables in the respective configuration (debug/run) before debugging or runnin
 
 
 -------------------------------------------------------------------------
-Project built and tested under OS: *Windows 7 (64-bit)*, *Ubuntu 16.04 LTS (64-bit)*
+Project built and tested under OS:   
+- *Windows 7 (64-bit)*
+- *Ubuntu 16.04 LTS (64-bit) (g++ (Ubuntu 5.4.0))*
+- *Red Hat 7.2 (64-bit) (g++ 4.8.5 (Red Hat 4.8.5-11))*
 
 
      

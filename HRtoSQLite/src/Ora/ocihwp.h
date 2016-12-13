@@ -10,6 +10,7 @@
 #include "oci.h"
 #include <assert.h>
 #include <iostream>
+#include <stdexcept>
 
 namespace ocihwp
 {

@@ -46,7 +46,7 @@ namespace Sqlt
 	{
 		public:
 			Session(const std::string& strDbFile);
-		   ~Session();
+		    virtual ~Session();
 
 			void commit();
 			void rollback();
@@ -84,7 +84,7 @@ namespace Sqlt
 			 */
 			TableWriter(const std::string& strDbFile, const std::string& strTableName);
 			TableWriter(const std::string& strDbFile, const std::string& strTableName, const Ora::Rowset::fields_t& fields);
-			~TableWriter();
+			virtual ~TableWriter();
 
 			void init(const Ora::Rowset::fields_t& fields);
 			/**

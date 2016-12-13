@@ -194,7 +194,7 @@ namespace Sqlt
 		using namespace Poco::Data::Keywords;
 
 		Poco::Data::SQLite::Connector::registerConnector();
-		SessionSp spSession(std::make_unique<Session>("SQLite", strDbFile));;
+		SessionSp spSession(std::make_shared<Session>("SQLite", strDbFile));;
 		return std::move(spSession);
 	}
 

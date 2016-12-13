@@ -5,8 +5,12 @@ set(CURRENT_DIR      "${CMAKE_CURRENT_SOURCE_DIR}")
 set(SOURCE_FILES_DIR "${CURRENT_DIR}/src")
 
 # set Google test pathes:
-#set(GTEST_INC_DIR  "")
-#set(GTEST_LIB_DIR  "")
+#set(GTEST_INC_DIR  ".../vendor/googletest-1.7.0/googletest/include")
+#set(GTEST_LIB_DIR  "...vendor/googletest-1.7.0/googletest/libs")
+
+set(GTEST_INC_DIR  "/home/victor/wp/github-wp/vendor/googletest-1.7.0/googletest/include")
+set(GTEST_LIB_DIR  "/home/victor/wp/github-wp/vendor/googletest-1.7.0/googletest/libs")
+
 
 
 set(GTEST_LIBS ${GTEST_LIB_DIR}/libgtest.a #[[${GTEST_LIB_DIR}/libgtest_main.a]])
