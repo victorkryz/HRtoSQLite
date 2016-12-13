@@ -2,7 +2,7 @@
 #.idea/
 /cmake-build*
 .local.*
-/*.db
+*.db
 
 #CMake:
 
