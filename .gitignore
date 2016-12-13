@@ -1,8 +1,7 @@
 # Project specific
-/Build
+#.idea/
 /cmake-build*
 .local.*
-.idea/
 *.db
 
 #CMake:
