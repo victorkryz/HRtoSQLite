@@ -97,7 +97,14 @@ HRtoSQLite_run -C//oracle_host/xe -N hr -P hr -S./../sql/hrSQLiteDDL.sql -O./../
     *(note: there's only x64 configuration provided)*
 
     Simulate a similar directories disposition (e.g. using file system links) or substitute these
-    directories on yours in projects settings (*"Additional Include Directories"*, *"Additional Library Directories"*)  
+    directories on yours in projects settings (*"Additional Include Directories"*, *"Additional Library Directories"*)
+
+        To get "google test" framework integrated into Visual Studio IDE, install the next NuGet packages for 
+        the project "HRtoSQLite_tests":
+        - gtest 17.0
+        - fix8.dependencies.gtest
+        - fix8.dependencies.gtest.symbols
+        
 
 
 ### Testing:
@@ -125,9 +132,9 @@ variables in the respective configuration (debug/run) before debugging or runnin
 
 -------------------------------------------------------------------------
 Project built and tested under OS:   
-- *Windows 7 (64-bit)*
-- *Ubuntu 16.04 LTS (64-bit) (g++ (Ubuntu 5.4.0))*
-- *Red Hat 7.2 (64-bit) (g++ 4.8.5 (Red Hat 4.8.5-11))*
+- *Windows 7 (64-bit) (Microsoft Visual Studio 2015 (Version 14.0.25123.00))* 
+- *Ubuntu 16.04 LTS (64-bit) (g++ 5.4.0)*
+- *Red Hat 7.2 (64-bit) (g++ 4.8.5-11)*
 
 
      
