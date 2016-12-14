@@ -64,7 +64,7 @@ class ExportrProcess : public ParameterizedProcess,
 		};
 
 		void reinitSQLiteDbStruct();
-		void launchTheCycle(std::promise<bool> &&prom);
+		void launchTheCycle(std::promise<bool>& prom);
 		void exportTable(const std::string strTableName);
 
 		std::string obtainParam(Parameters param)

@@ -58,9 +58,9 @@ void ExportrProcess::startProcess()
 		std::promise<bool> prom;
 		auto fut = prom.get_future();
 
-		std::thread wth([this](auto&& p) {
-            this->launchTheCycle(std::move(p));
-				}, std::move(prom));
+		std::thread wth([this, &prom] {
+			this->launchTheCycle(prom);
+		});
 
 		wth.join();
 
@@ -93,7 +93,7 @@ void ExportrProcess::reinitSQLiteDbStruct()
 }
 
 
-void ExportrProcess::launchTheCycle(std::promise<bool> &&prom)
+void ExportrProcess::launchTheCycle(std::promise<bool>& prom)
 {
 	try
 	{
