@@ -47,25 +47,43 @@ TEST_F(HRSelectionTS, ManagersWithExtraInfo)
     selectAndFetchToStdOut(strStmt);
 }
 
+
+
+
+
 //& Select all the employee's hierarchy:
 TEST_F(HRSelectionTS, SelectEmployeeHierarchy)
 {
     std::cout << std::endl << "Select all the employee's hierarchy:" << std::endl;
 
     const std::string strStmt =
-            "SELECT ea.EMPLOYEE_ID as \"Id\",  ea.\"Employee\", j.JOB_TITLE as \"Job\", ea.\"Email\", ea.\"Salary\",  ea.\"Commission(%)\", "
-                    "NVL2(m.MANAGER_ID, 'Manager', '') as \"Position\", d.DEPARTMENT_NAME as \"Department\", l.STATE_PROVINCE as \"State\", "
-                    "l.CITY as \"City\", c.COUNTRY_NAME as \"Country\", r.REGION_NAME as \"Region\" FROM "
-                    "(SELECT LEVEL l, EMPLOYEE_ID, LPAD(' ',2+(LEVEL-1)) || '- ' || FIRST_NAME ||' ' || LAST_NAME as \"Employee\", "
-                    "EMAIL as \"Email\", SALARY as \"Salary\", COMMISSION_PCT as \"Commission(%)\", JOB_ID "
-                "FROM EMPLOYEES e START WITH e.MANAGER_ID is NULL CONNECT BY PRIOR e.EMPLOYEE_ID = e.MANAGER_ID) ea "
-                        "left join (SELECT distinct MANAGER_ID FROM EMPLOYEES) m on (ea.EMPLOYEE_ID = m.MANAGER_ID) "
-                        "left join DEPARTMENTS d on (ea.EMPLOYEE_ID = d.MANAGER_ID) "
-                        "left join LOCATIONS l on (d.LOCATION_ID = l.LOCATION_ID) "
-                        "left join COUNTRIES c on (l.COUNTRY_ID = c.COUNTRY_ID) "
-                        "left join REGIONS r on (c.REGION_ID = r.REGION_ID) "
-                        "left join LOCATIONS l on (d.LOCATION_ID = l.LOCATION_ID) "
-                        "left join JOBS j on (ea.JOB_ID = j.JOB_ID)";
+
+    "select employee_id id, cast((rank_decorator ||' '|| full_name) as varchar2(40)) as full_name, job_title as job, "
+            "cast(nvl2(department_id, department_name || ' (' || department_id ||')', '') as varchar2(30)) as department, "
+            "nvl2(state_province, state_province || ' (' || country ||')','') as location , region_name as region, "
+            "phone, email, salary, commission, job_id, location_id, country_id, region_id from "
+        "(with sq as (select * from "
+        "(select level l, employee_id,  first_name ||' ' || last_name as full_name, "
+                "first_name, last_name, phone_number, email, salary, commission_pct, "
+                "job_id, hire_date, department_id "
+        "from employees e "
+        "start with e.manager_id is null "
+        "connect by prior e.employee_id = e.manager_id) xa "
+            "left join (select distinct manager_id from employees) m on (xa.employee_id = m.manager_id)) "
+                "select ea.employee_id as employee_id, first_name, last_name, ea.job_id as job_id, j.job_title as job_title, "
+                "ea.phone_number as phone, ea.email as email, hire_date, ea.salary as salary, "
+                "nvl(ea.commission_pct, 0) as commission, ea.manager_id as manager_id, nvl2(ea.manager_id, 1, 0) as is_manager, "
+                "d.department_id as department_id, department_name, l.state_province as state_province, "
+                "l.city as city, c.country_name as country, r.region_id as region_id, c.country_id, l.location_id, "
+                "r.region_name as region_name, l as rank, full_name, lpad(' ',2+(l-1)) || '-' as rank_decorator "
+                "from sq ea "
+            "left join departments d on (ea.department_id = d.department_id) "
+            "left join locations l on (d.location_id = l.location_id) "
+            "left join countries c on (l.country_id = c.country_id) "
+            "left join regions r on (c.region_id = r.region_id) "
+            "left join locations l on (d.location_id = l.location_id) "
+            "left join jobs j on (ea.job_id = j.job_id))";
+
     selectAndFetchToStdOut(strStmt);
 }
 
