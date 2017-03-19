@@ -47,10 +47,6 @@ TEST_F(HRSelectionTS, ManagersWithExtraInfo)
     selectAndFetchToStdOut(strStmt);
 }
 
-
-
-
-
 //& Select all the employee's hierarchy:
 TEST_F(HRSelectionTS, SelectEmployeeHierarchy)
 {
