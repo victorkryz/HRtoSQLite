@@ -55,6 +55,7 @@ Ora::ConnectionSp createConnection(const std::string& connStr, const std::string
 		spResConn.swap(spConn);
 	}
 	catch (const Ora::Exception& e) {
+		//& log this exception		
 		throw e;
 	}
 
