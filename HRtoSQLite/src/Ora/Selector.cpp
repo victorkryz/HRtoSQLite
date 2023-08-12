@@ -25,7 +25,7 @@ namespace Ora {
 		defineFields(stmt, fields);
 
 		Rowset rws(conn_, std::move(stmt), std::move(fields));
-		return std::move(rws);
+		return rws;
 	}
 
 	Rowset::fields_t Selector::buildFiledSet(Ora::StatementSp &stmt) const {
@@ -54,7 +54,7 @@ namespace Ora {
 
 		} while (status == OCI_SUCCESS);
 
-		return std::move(fields);
+		return fields;
 	}
 
 	FieldDefSp Selector::generateSelectionField(const Describer::field_info_t &fi) const {
@@ -159,7 +159,7 @@ namespace Ora {
 			}
 		}
 
-		return std::move(strSelList);
+		return strSelList;
 	}
 
 }; // namespace Ora

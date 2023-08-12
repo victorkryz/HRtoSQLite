@@ -111,7 +111,7 @@ namespace Ora
 				 OCIStmtExecute(conn.getSvcCtx()->get(), stmtSp->get(), spErr->get(),
 								iters, 0, nullptr, nullptr, OCI_DEFAULT));
 
-		return std::move(stmtSp);
+		return stmtSp;
 	}
 
 };
@@ -305,7 +305,7 @@ class DTConv
 				strTmp.assign(reinterpret_cast<char*>(p), szStr);
 			}
 
-			return std::move(strTmp);
+			return strTmp;
 		}
 
 		bool OCINumberIsInt(const OCINumber& num) const
@@ -362,7 +362,7 @@ class DTConv
 			if (0 != bufSz)
 				strTmp.assign(reinterpret_cast<char*>(chBuf), bufSz);
 
-			return std::move(strTmp);
+			return strTmp;
 		}
 
 
@@ -393,7 +393,7 @@ class DTConv
 			if (0 != bufSz)
 				strTmp.assign(reinterpret_cast<char*>(chBuf), bufSz);
 
-			return std::move(strTmp);
+			return strTmp;
 		}
 
 		

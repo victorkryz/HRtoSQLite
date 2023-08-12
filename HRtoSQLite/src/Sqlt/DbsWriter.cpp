@@ -159,7 +159,7 @@ namespace Sqlt
 		}
 
 		std::string strResStmt(Poco::format(stmtTempl, strTableName_, strNames, strVals));
-		return std::move(strResStmt);
+		return strResStmt;
 	}
 
 	void TableWriter::insertRow(const Poco::Data::AbstractBindingVec& vals)
@@ -195,7 +195,7 @@ namespace Sqlt
 
 		Poco::Data::SQLite::Connector::registerConnector();
 		SessionSp spSession(std::make_shared<Session>("SQLite", strDbFile));;
-		return std::move(spSession);
+		return spSession;
 	}
 
 	void Utils::executeCommands(SessionSp& spSession, const std::list<std::string>& commands)

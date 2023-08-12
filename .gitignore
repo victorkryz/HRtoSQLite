@@ -1,5 +1,7 @@
 # Project specific
 /Build
+/build
+.vscode
 /cmake-build*
 .local.*
 .idea/
