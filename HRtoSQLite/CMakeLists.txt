@@ -15,6 +15,13 @@ set(SOURCE_FILES_DIR "${CURRENT_DIR}/src")
 #set(POCO_LIB_DIR     "${POCO_BASE}/poco/lib")
 #---------------------------------------------------------
 
+# set OCI and Poco libs paths:
+#--------------------------------------------------------
+set(OCI_INC_DIR      "/home/viktor/Oracle/instantclient_21_11/sdk/include")
+set(OCI_LIB_DIR      "/home/viktor/Oracle/instantclient_21_11")
+set(POCO_INC_DIR     "/usr/local/include/Poco")
+set(POCO_LIB_DIR     "/usr/local/lib")
+#---------------------------------------------------------
 
 function(check_vars var)
     if(NOT DEFINED ${var} )
@@ -35,22 +42,18 @@ aux_source_directory("${SOURCE_FILES_DIR}/Ora" Source_files_Ora)
 aux_source_directory("${SOURCE_FILES_DIR}/Sqlt" Source_files_Sqlt)
 add_library(HRtoSQLite STATIC ${HRtoSQLite_files} ${Source_files_Ora} ${Source_files_Sqlt})
 
-target_compile_options(HRtoSQLite PUBLIC -g -std=c++1y)
+target_compile_options(HRtoSQLite PUBLIC -g -std=c++17)
 
 set_target_properties(HRtoSQLite PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(HRtoSQLite PUBLIC ${OCI_INC_DIR} PUBLIC ${POCO_INC_DIR})
 
 set(OCI_LIBS    ${OCI_LIB_DIR}/libclntsh.so)
-set(POCO_LIBS   ${POCO_LIB_DIR}/libPocoFoundation
-                ${POCO_LIB_DIR}/libPocoUtil
-                ${POCO_LIB_DIR}/libPocoData
-                ${POCO_LIB_DIR}/libPocoDataSQLite)
+set(POCO_LIBS   ${POCO_LIB_DIR}/libPocoFoundation.so
+                ${POCO_LIB_DIR}/libPocoUtil.so
+                ${POCO_LIB_DIR}/libPocoData.so
+                ${POCO_LIB_DIR}/libPocoDataSQLite.so)
 
-set (POCO_LINKED_LIBS "")
-foreach(x ${POCO_LIBS})
-    list (APPEND POCO_LINKED_LIBS debug ${x}d.so optimized ${x}.so)
-endforeach()
 
 target_link_libraries(HRtoSQLite   PUBLIC ${OCI_LIBS}
-                                   PUBLIC ${POCO_LINKED_LIBS}
+                                   PUBLIC ${POCO_LIBS}
                                    pthread)

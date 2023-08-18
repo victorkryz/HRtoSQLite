@@ -4,14 +4,14 @@
 set(CURRENT_DIR      "${CMAKE_CURRENT_SOURCE_DIR}")
 set(SOURCE_FILES_DIR "${CURRENT_DIR}/src")
 
-# set Google test pathes:
-#set(GTEST_INC_DIR  "${VENDOR_BASE_FOLDER}/vendor/googletest-1.7.0/googletest/include")
-#set(GTEST_LIB_DIR  "${VENDOR_BASE_FOLDER}/vendor/googletest-1.7.0/googletest/libs")
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/f8d7d77c06936315286eb55f8de22cd23c188571.zip
+)
 
-
-set(GTEST_LIBS ${GTEST_LIB_DIR}/libgtest.a #[[${GTEST_LIB_DIR}/libgtest_main.a]])
-
-add_definitions(-D_GTEST_)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
 
 aux_source_directory("${SOURCE_FILES_DIR}" Source_files)
 aux_source_directory("${SOURCE_FILES_DIR}/Ora" Source_files_Ora)
@@ -23,11 +23,11 @@ add_executable(GTests_run   ${Source_files}
                             ${Source_files_Sqlt}
                             ${Source_files_Others})
 
-
-target_compile_options(GTests_run PUBLIC -g -std=c++1y)
+target_compile_options(GTests_run PUBLIC -g -std=c++17)
 
 set_target_properties(GTests_run PROPERTIES LINKER_LANGUAGE CXX)
-target_include_directories(GTests_run PRIVATE ${GTEST_INC_DIR})
 
-target_link_libraries(GTests_run PUBLIC ${GTEST_LIBS})
-target_link_libraries(GTests_run PUBLIC HRtoSQLite -lpthread -lm)
+
+target_link_libraries(GTests_run PUBLIC GTest::gtest_main 
+                                        HRtoSQLite 
+                                        -lpthread -lm)

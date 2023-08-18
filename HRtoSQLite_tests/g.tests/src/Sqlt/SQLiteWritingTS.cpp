@@ -41,7 +41,7 @@ class SQLiteWritingTS : public ::testing::Test
 													  glTestParams.strUserName_,
 													  glTestParams.strUserPassword_));
 			spConn_ = spConn;
-			spRowReader_ = std::unique_ptr<Ora::RowReaderToStream>(new Ora::RowReaderToStream(spConn_, std::cout));
+			spRowReader_ =  std::make_unique<Ora::RowReaderToStream>(spConn_, std::cout);
 		}
 
 		void deinitConnection() {
@@ -77,7 +77,7 @@ class SQLiteWritingTS : public ::testing::Test
 				std::cerr << "Table " << strTableName <<", exception occured: " << e.what() << std::endl;
 			}
 
-			ASSERT_TRUE(bSucceeded);
+			EXPECT_TRUE(bSucceeded);
 		}
 
 
