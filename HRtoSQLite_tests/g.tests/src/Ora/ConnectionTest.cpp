@@ -18,14 +18,13 @@ TEST(OraConnectionTestCase, OraConnectionTest)
 		connHlp.SetUp();
 
 		Ora::ConnectionSp& spConn = connHlp.getConnection();
-		ASSERT_TRUE((spConn->getSvcCtx() != nullptr));
+		EXPECT_TRUE((spConn->getSvcCtx() != nullptr));
 
 		connHlp.TearDown();
 	} 
   catch (const std::exception& e)
 	{
 		std::string str(e.what());
-		std::cerr << str << e.what() << std::endl;
-		throw;
+		FAIL() << e.what();
 	}
 }

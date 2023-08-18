@@ -83,10 +83,10 @@ TEST_F(HRSelectionTS, SelectEmployeeHierarchy)
     selectAndFetchToStdOut(strStmt);
 }
 
-//& Select min/avg/max sallary of each kind of job in each department:
+//& Select min/avg/max salary of each kind of job in each department:
 TEST_F(HRSelectionTS, SelectSalaryStatistic)
 {
-    std::cout << std::endl << "Select sallary statistic (by departments/jobs):" << std::endl;
+    std::cout << std::endl << "Select salary statistic (by departments/jobs):" << std::endl;
 
     const std::string strStmt =
     "SELECT mms.DEPARTMENT_NAME ||  NVL2(DEPARTMENT_ID, '(' || DEPARTMENT_ID || ')', '') as \"Department(id)\", j.JOB_TITLE as \"Job\", "

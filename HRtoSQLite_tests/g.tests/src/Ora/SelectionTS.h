@@ -60,7 +60,7 @@ protected:
             std::cerr << "SelectionTS::selectAndFetchToStdOut(): " << e.what() << std::endl;
         }
 
-        ASSERT_TRUE(bSucceeded);
+        EXPECT_TRUE(bSucceeded);
     }
 
 
