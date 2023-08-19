@@ -11,22 +11,15 @@ HRtoSQLite utility transfers Oracle Database sample HR schema's data into SQLite
  
 #### Features:
  
- - Oracle call interface (OCI) is used to Oracle acces;
+ - Oracle call interface (OCI) is used to Oracle database access;
  - Poco features:
     - there's used POCO-proposed skeleton for application organizing (Application class); 
-    - data access API (SQLite direction);
+    - data access API (SQLite database);
     - command-line parameters handling feature;
     - logging into application log;
-    - some utilities things (e.g. string formatting)
- - C++ 11 features are used:
-    - "auto" keyword, "move semantics", lambda functions, threading,  
-       shared_ptr(s), enum, on-place class member initialization,   
-       "using" specificator for custom-types definitions,   
-       "override" for virtual functions, range-based for loop,   
-       strongly typed enumerations, etc.
+    - some utilities (e.g. string formatting);
  - "Google's C++ test" as a unit testing framework.
- - CMake configuration files and tool;
- - IDE: CLion (for Linux), Visual Studio 2015 (for Windows);
+ - CMake based configuration;
 
 
 ### Usage:
@@ -60,7 +53,7 @@ HRtoSQLite_run -C//oracle_host/xe -N hr -P hr -S./../sql/hrSQLiteDDL.sql -O./../
 - Download and build [*Poco C++ libraries*](https://pocoproject.org/download/)
 - Download and build [*Google's C++ test framework*](https://github.com/google/googletest) ([*read build instructions*](https://github.com/google/googletest/blob/master/googletest/README.md)) 
 
- *(On the development phase, there's used POCO version 1.7.4, Oracle client 12.1, googletest-1.7.0)*
+ *(On the development phase, there's used POCO version 1.7.4, Oracle client 12.1, googletest-1.14.0)*
 
 - #### For linux:
 
