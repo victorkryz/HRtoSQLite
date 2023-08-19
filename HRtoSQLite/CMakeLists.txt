@@ -40,12 +40,16 @@ set_target_properties(HRtoSQLite PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(HRtoSQLite PUBLIC ${OCI_INC_DIR} PUBLIC ${POCO_INC_DIR})
 
 set(OCI_LIBS    ${OCI_LIB_DIR}/libclntsh.so)
-set(POCO_LIBS   ${POCO_LIB_DIR}/libPocoFoundation.so
-                ${POCO_LIB_DIR}/libPocoUtil.so
-                ${POCO_LIB_DIR}/libPocoData.so
-                ${POCO_LIB_DIR}/libPocoDataSQLite.so)
+set(POCO_LIBS   ${POCO_LIB_DIR}/libPocoFoundation
+                ${POCO_LIB_DIR}/libPocoUtil
+                ${POCO_LIB_DIR}/libPocoData
+                ${POCO_LIB_DIR}/libPocoDataSQLite)
 
+set (POCO_LINKED_LIBS "")
+foreach(x ${POCO_LIBS})
+    list (APPEND POCO_LINKED_LIBS debug ${x}d.so optimized ${x}.so)
+endforeach()
 
 target_link_libraries(HRtoSQLite   PUBLIC ${OCI_LIBS}
-                                   PUBLIC ${POCO_LIBS}
+                                   PUBLIC ${POCO_LINKED_LIBS}
                                    pthread)
