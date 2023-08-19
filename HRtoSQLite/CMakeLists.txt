@@ -9,12 +9,11 @@ set(SOURCE_FILES_DIR "${CURRENT_DIR}/src")
 
 # set OCI and Poco libs paths:
 #--------------------------------------------------------
-#set(OCI_INC_DIR      "/usr/include/oracle/12.1/client64")
-#set(OCI_LIB_DIR      "/usr/lib/oracle/12.1/client64/lib")
-#set(POCO_INC_DIR     "${POCO_BASE}/poco/include")
-#set(POCO_LIB_DIR     "${POCO_BASE}/poco/lib")
+#set(OCI_INC_DIR       ".../Oracle/instantclient_21_11/sdk/include")
+#set(OCI_LIB_DIR       ".../Oracle/instantclient_21_11")
+#set(POCO_INC_DIR     "/usr/local/include/Poco")
+#set(POCO_LIB_DIR     "/usr/local/lib")
 #---------------------------------------------------------
-
 
 function(check_vars var)
     if(NOT DEFINED ${var} )
@@ -35,7 +34,7 @@ aux_source_directory("${SOURCE_FILES_DIR}/Ora" Source_files_Ora)
 aux_source_directory("${SOURCE_FILES_DIR}/Sqlt" Source_files_Sqlt)
 add_library(HRtoSQLite STATIC ${HRtoSQLite_files} ${Source_files_Ora} ${Source_files_Sqlt})
 
-target_compile_options(HRtoSQLite PUBLIC -g -std=c++1y)
+target_compile_options(HRtoSQLite PUBLIC -g -std=c++17)
 
 set_target_properties(HRtoSQLite PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(HRtoSQLite PUBLIC ${OCI_INC_DIR} PUBLIC ${POCO_INC_DIR})
