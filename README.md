@@ -65,8 +65,7 @@ HRtoSQLite_run -C//oracle_host/xe -N hr -P hr -S./../sql/hrSQLiteDDL.sql -O./../
     - go into file HRtoSQLite_tests/g.tests/CMakeLists.txt and set google test paths in variables:   
       *GTEST_INC_DIR, GTEST_LIB_DIR*
 
-    In case you use CLion IDE, open project root directory to explore all projects' structure, build them and run.
-   
+       
     *To build it without IDE, using only CMake CLI, do steps like below:*  
 
         ```
@@ -119,7 +118,7 @@ OUTPUT         SQLite database file (default: ./hr.db)
 Directory 'Launchers' contains some configuration and scripts to help test launching.  
 To launch unit tests from command line, setup variables in *'config.env'* file and launch *'testLauncher'* script.
 
-**Warning:** in case these tests are launched under from IDE (CLion, VS 2015), setup the given environment 
+**Warning:** in case these tests are launched under from IDE (e.g.Visual Studio), setup the given environment 
 variables in the respective configuration (debug/run) before debugging or running some test(s)!  
 
 
