@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 project(HRtoSQLite_Root)
 
 include_directories(HRtoSQLite HRtoSQLite/src)
