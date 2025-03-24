@@ -26,7 +26,7 @@ TEST(TestIfHR_Test , TestIfHR)
     {
         std::string str(e.what());
         std::cerr << str << e.what() << std::endl;
-        throw;
+        FAIL() << str.c_str();
     }
 }
 

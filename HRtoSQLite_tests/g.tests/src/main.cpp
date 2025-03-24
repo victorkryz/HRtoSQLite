@@ -13,7 +13,7 @@
 #ifdef _WIN32
 	UnitTestParameters glTestParams{ "//localhost:1521/xe", "hr", "hr" };
 #else
-	UnitTestParameters glTestParams{ "//192.168.1.35:1521/xe", "hr", "hr" };
+	UnitTestParameters glTestParams{ "//192.168.xxx.xxx:1521/xe", "hr", "hr" };
 #endif // _WIN32
 
 
