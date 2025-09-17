@@ -14,6 +14,7 @@
 #include "Poco/Data/AbstractBinding.h"
 #include "Poco/Data/Statement.h"
 #include "Poco/Nullable.h"
+#include "Poco/Version.h"
 
 namespace Sqlt
 {
@@ -51,7 +52,11 @@ namespace Sqlt
 				bindings_[static_cast<size_t>(fieldIndex - 1)] = spBinding;
 			}
 
-			Poco::NullType null_ = Poco::NullType::NULL_GENERIC;
+           	#if POCO_VERSION < 0x010E0200
+				Poco::NullType null_ = Poco::NullType::NULL_GENERIC;
+			#else	
+				Poco::NullType null_ = std::nullopt;
+			#endif
 			DTConv conv_;
 			bindings_t bindings_;
 	};
