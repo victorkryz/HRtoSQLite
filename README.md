@@ -32,12 +32,12 @@ HRtoSQLite utility transfers Oracle Database sample HR schema's data into SQLite
 -C value, --ora-conn-str=value  Oracle connection string   (//host[:port]/service)  
 -N value, --ora-name=value      Oracle user name (default: "hr")  
 -P value, --ora-psw=value       Oracle user password  
--S file, --sqlt-ddl=file        HR-SQLite database structute intialization file  
+-S file, --sqlt-ddl=file        HR-SQLite database structure initialization file  
                                 (default: ./sql/hrSQLiteDDL.sql)  
 -O file, --output=file          SQLite database file (default: ./hr.db)  
 ```
 
-Connection string format confirms to  [*Database Connection Strings for OCI Instant Client*](http://docs.oracle.com/database/121/LNOCI/oci01int.htm#LNOCI16167)
+Connection string format conforms to  [*Database Connection Strings for OCI Instant Client*](http://docs.oracle.com/database/121/LNOCI/oci01int.htm#LNOCI16167)
 
 Command line samples:
 
