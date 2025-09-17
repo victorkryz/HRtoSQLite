@@ -123,11 +123,8 @@ variables in the respective configuration (debug/run) before debugging or runnin
 
 
 -------------------------------------------------------------------------
-Project built and tested under OS:   
-- *Windows 7 (64-bit) (Microsoft Visual Studio 2015 (Version 14.0.25123.00))* 
-- *Ubuntu 16.04 LTS (64-bit) (g++ 5.4.0)*
+The project has been built and tested on the following platforms:
+- *Ubuntu 18.04 LTS (64-bit) (g++ 11.4.0)*
+- *Ubuntu 24.04 LTS (64-bit) (g++ 13.3.0)*
 - *Red Hat 7.2 (64-bit) (g++ 4.8.5-11)*
-
-
-     
- 
+- *Windows 7 (64-bit) (Microsoft Visual Studio 2015 (Version 14.0.25123.00))* 
