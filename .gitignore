@@ -5,7 +5,6 @@
 /cmake-build*
 .local.*
 .idea/
-*.db
 
 #CMake:
 
