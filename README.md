@@ -1,4 +1,14 @@
-# HRtoSQLite
+# $\color{teal}\textit{\textbf{HRtoSQLite}}$
+
+![C++](https://img.shields.io/badge/C++-17-purple?logo=C++)
+![cmake](https://img.shields.io/badge/cmake-3.31.3-brightgreen)
+![poco](https://img.shields.io/badge/Poco-1.14.2-blue?logo=Poco)
+![OCI](https://img.shields.io/badge/OCI-23.9-red?logo=Oracle)
+![gtest](https://img.shields.io/badge/GTest-1.14.0-blueviolet)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-18.04+-red?logo=Ubuntu)
+![Windows](https://img.shields.io/badge/Windows-7+-blue?logo=Windows)
+
+
 HRtoSQLite utility transfers Oracle Database sample HR schema's data into SQLite database.
 
 
@@ -42,8 +52,8 @@ Connection string format conforms to  [*Database Connection Strings for OCI Inst
 Command line samples:
 
 ```
-HRtoSQLite_run -C//oracle_host/xe -N hr -P hr -S./../sql/hrSQLiteDDL.sql
-HRtoSQLite_run -C//oracle_host/xe -N hr -P hr -S./../sql/hrSQLiteDDL.sql -O./../dbs/hr.db
+HRtoSQLite_run -C//oracle_host:1521/xe -N hr -P hr -S./../sql/hrSQLiteDDL.sql
+HRtoSQLite_run -C//oracle_host1521/xepdb1 -N hr -P hr -S./../sql/hrSQLiteDDL.sql -O./../dbs/hr.db
 ```
 
 ### Building:
@@ -53,7 +63,8 @@ HRtoSQLite_run -C//oracle_host/xe -N hr -P hr -S./../sql/hrSQLiteDDL.sql -O./../
 - Download and build [*Poco C++ libraries*](https://pocoproject.org/download/)
 - Download and build [*Google's C++ test framework*](https://github.com/google/googletest) ([*read build instructions*](https://github.com/google/googletest/blob/master/googletest/README.md)) 
 
- *(On the development phase, there's used POCO version 1.7.4, Oracle client 12.1, googletest-1.14.0)*
+ *(On the development phase, there's used POCO version 1.7.4, 1.13.3, 1.14.2, 
+ Oracle client 12.1, 21.11, 23.9, googletest-1.14.0)*
 
 - #### For linux:
 
@@ -71,7 +82,7 @@ HRtoSQLite_run -C//oracle_host/xe -N hr -P hr -S./../sql/hrSQLiteDDL.sql -O./../
         ```
         mkdir build-debug
         cd build-debug
-        cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" ../.
+        cmake -DCMAKE_BUILD_TYPE=Debug ../.
         cmake --build ./ --target all
         ```
 
@@ -81,28 +92,21 @@ HRtoSQLite_run -C//oracle_host/xe -N hr -P hr -S./../sql/hrSQLiteDDL.sql -O./../
 
         Projects sesttings suppose the next default headers and libraries directories configuration:   
 
-        ..\..\..\vendor\instantclient_12_1\sdk\include  - OCI headers
-        ..\..\..\vendor\poco-1.7.4\include              - POCO headers
-        ..\..\..\vendor\instantclient_12_1\sdk\lib\msvc - OCI libraries
-        .\..\..\vendor\poco-1.7.4\lib64                 - POCO libraries
+        ..\..\..\vendor\instantclient\sdk\include       - OCI headers
+        ..\..\..\vendor\poco\include                    - POCO headers
+        ..\..\..\vendor\instantclient\sdk\lib\msvc      - OCI libraries
+        .\..\..\vendor\poco\lib64                       - POCO libraries
 
     *(note: there's only x64 configuration provided)*
 
     Simulate a similar directories disposition (e.g. using file system links) or substitute these
     directories on yours in projects settings (*"Additional Include Directories"*, *"Additional Library Directories"*)
 
-        To get "google test" framework integrated into Visual Studio IDE, install the next NuGet packages for 
-        the project "HRtoSQLite_tests":
-        - gtest 17.0
-        - fix8.dependencies.gtest
-        - fix8.dependencies.gtest.symbols
-        
-
 
 ### Testing:
 -------------------------------------------------------------------------
 
-To get the unit tests runnable, build the subproject *HRtoSQLite_tests*.  
+To get the unit tests runnable, build the sub-project *HRtoSQLite_tests*.  
 There are provided a set of tests for Oracle connection, reading 'HR' schema tables, writing data into SQLite database, e.g.
 
 The tests are parametrized by environment variables:
@@ -118,8 +122,8 @@ OUTPUT         SQLite database file (default: ./hr.db)
 Directory 'Launchers' contains some configuration and scripts to help test launching.  
 To launch unit tests from command line, setup variables in *'config.env'* file and launch *'testLauncher'* script.
 
-**Warning:** in case these tests are launched under from IDE (e.g.Visual Studio), setup the given environment 
-variables in the respective configuration (debug/run) before debugging or running some test(s)!  
+**Warning:** in case these tests are launched under from IDE (e.g.Visual Studio), setup the given environment variables in the respective configuration (debug/run) before debugging or 
+running some test(s)!  
 
 
 -------------------------------------------------------------------------
