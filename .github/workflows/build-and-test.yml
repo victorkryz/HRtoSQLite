@@ -1,0 +1,59 @@
+# This starter workflow is for a CMake project running on a single platform. There is a different starter workflow if you need cross-platform coverage.
+# See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-multi-platform.yml
+name: Build and perform unit tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: "Build configuration"
+        required: true
+        default: "Release"
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+  GH_TOKEN: ${{github.token}}
+
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can convert this to a matrix build if you need cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Create .deps directory
+      run: |
+          echo "Workspace path is: ${{github.workspace}}" 
+          mkdir -p .deps
+          ls -l .
+
+    - name: Download OCI SDK, libs
+      run: |
+            curl -L -o ${{github.workspace}}/.deps/ora-instantclient_basic.zip  https://download.oracle.com/otn_software/linux/instantclient/2390000/instantclient-sdk-linux.x64-23.9.0.25.07.zip 
+            curl -L -o ${{github.workspace}}/.deps/ora-instantclient_sdk.zip  https://download.oracle.com/otn_software/linux/instantclient/2390000/instantclient-basic-linux.x64-23.9.0.25.07.zip
+            unzip -o .deps/ora-instantclient_basic.zip -d .deps/install
+            unzip -o .deps/ora-instantclient_sdk.zip -d .deps/install
+    
+    - name: Download POCO release archive
+      run: curl -L https://github.com/pocoproject/poco/archive/refs/tags/poco-1.14.2-release.tar.gz -o .deps/poco-1.14.2-release.tar.gz
+
+    - name: Extract POCO sources
+      run: |
+            tar -xzf .deps/poco-1.14.2-release.tar.gz -C .deps
+            ls -l .deps
+
+    - name: Build and install POCO libs
+      run: |
+            cd .deps/poco-poco-1.14.2-release
+            ./build_cmake.sh -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/.deps/install
+            ls -l ${{github.workspace}}/.deps/install 
+
+    - name: Build HRtoSQLite
+      run: | 
+        ./build.sh ${{env.BUILD_TYPE}}  ${{github.workspace}}/.deps/install/instantclient_23_9/sdk/include ${{github.workspace}}/.deps/install/instantclient_23_9 ${{github.workspace}}/.deps/install/include ${{github.workspace}}/.deps/install/lib
+      
+         
