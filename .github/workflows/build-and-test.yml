@@ -1,6 +1,6 @@
 # This starter workflow is for a CMake project running on a single platform. There is a different starter workflow if you need cross-platform coverage.
 # See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-multi-platform.yml
-name: Build and perform unit tests
+name: Build and test
 
 on:
   workflow_dispatch:
@@ -14,13 +14,11 @@ env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
   GH_TOKEN: ${{github.token}}
+  ORACLE_PASSWORD: manager
 
 jobs:
   build:
-    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
-    # You can convert this to a matrix build if you need cross-platform coverage.
-    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  
 
     steps:
     - uses: actions/checkout@v4
@@ -55,5 +53,154 @@ jobs:
     - name: Build HRtoSQLite
       run: | 
         ./build.sh ${{env.BUILD_TYPE}}  ${{github.workspace}}/.deps/install/instantclient_23_9/sdk/include ${{github.workspace}}/.deps/install/instantclient_23_9 ${{github.workspace}}/.deps/install/include ${{github.workspace}}/.deps/install/lib
-      
+
+    - name: Upload Launchers
+      uses: actions/upload-artifact@v4
+      with: 
+          name: Launchers
+          path: Launchers/
+
+    - name: Upload HRtoSQLite build
+      uses: actions/upload-artifact@v4
+      with: 
+          name: HRtoSQLite-build
+          path: build/
+
+    - name: Upload dependincies
+      uses: actions/upload-artifact@v4
+      with: 
+          name: deps
+          path: .deps/install/
+
+    - name: Upload sql sripts
+      uses: actions/upload-artifact@v4
+      with: 
+          name: sql
+          path: sql
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    services:
+      oracle:
+        image: gvenzl/oracle-free:23.5-slim
+        ports:
+          - 1521:1521
+        env:
+          ORACLE_PASSWORD: ${{ env.ORACLE_PASSWORD }}
+        options: >-
+          --name oracle-free
+          --health-cmd "healthcheck.sh"
+          --health-interval 15s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      - name: Download HRtoSQLite build
+        uses: actions/download-artifact@v5
+        with:
+          name: HRtoSQLite-build            
+          path: build/
+
+      - name: Download dependincies
+        uses: actions/download-artifact@v5
+        with:
+          name: deps            
+          path: .local/          
          
+      - name: Download Launchers
+        uses: actions/download-artifact@v5
+        with: 
+            name: Launchers
+            path: Launchers/
+
+      - name: Download sql sripts
+        uses: actions/download-artifact@v5
+        with: 
+            name: sql
+            path: sql/
+        
+      - name: Check downloads
+        run: |
+              ls -l .local
+              ls -l .local/instantclient_23_9
+              ls -l .local/lib
+              ls -l build
+              ls -l Launchers
+              ls -l sql
+
+      - name: Reapply executable attributes
+        run: | 
+              chmod +x build/HRtoSQLite_tests/g.tests/GTests_run
+              chmod +x build/HRtoSQLite_run/HRtoSQLite_run
+              chmod +x Launchers/*.sh
+
+      - name: Test Oracle connection
+        run: |
+              for i in {1..20}; do
+                  echo "exit" |  docker exec -i oracle-free sqlplus -s system/${{ env.ORACLE_PASSWORD }}@//localhost/FREEPDB1  && break
+                  echo "Waiting for Oracle..."
+                  sleep 10
+              done
+              echo "SELECT 'OK' FROM dual;" | docker exec -i oracle-free sqlplus -s system/${{ env.ORACLE_PASSWORD }}@//localhost:1521/FREEPDB1
+
+      - name: Clone db-sample-schemas repo
+        uses: actions/checkout@v4
+        with:
+          repository: oracle-samples/db-sample-schemas
+          ref: main   
+          path: external/oracle/scripts
+
+      - name: Check scripts
+        run: ls -l external/oracle/scripts
+
+      - name: Copy scripts into container
+        run: | 
+            docker exec oracle-free mkdir -p /opt/oracle/scripts
+            docker cp external/oracle/scripts/human_resources oracle-free:/opt/oracle/scripts/human_resources
+            docker exec oracle-free ls -l /opt/oracle/scripts
+            
+      - name: Tune installing scripts
+        run: |
+            docker exec -u root oracle-free sed -i 's/^ACCEPT /rem &/' /opt/oracle/scripts/human_resources/hr_install.sql  
+            docker exec -u root oracle-free bash -c 'echo  "DEFINE pass = hr 
+            DEFINE tbs = USERS
+            DEFINE overwrite_schema = YES 
+            @/opt/oracle/scripts/human_resources/hr_install.sql
+            exit" > install_hr_wrapper.sql'
+            docker exec oracle-free ls -l
+            docker exec oracle-free cat install_hr_wrapper.sql
+            
+      - name: Install HR database
+        run:  docker exec -i oracle-free sqlplus -s system/manager@//localhost/FREEPDB1  @install_hr_wrapper.sql
+
+      - name: Check after HR installing
+        run: echo "SELECT * FROM countries;" |  docker exec -i oracle-free sqlplus -s hr/hr@//localhost/FREEPDB1
+
+      - name: Install Oracle client prerequisites
+        run: |
+            sudo ln -s /usr/lib/x86_64-linux-gnu/libaio.so.1t64 /usr/lib/x86_64-linux-gnu/libaio.so.1
+
+      - name: Execute unit-tests
+        run: |
+            cd Launchers
+            export LD_LIBRARY_PATH=${{ github.workspace }}/.local/lib/:${{ github.workspace }}/.local/instantclient_23_9:$LD_LIBRARY_PATH
+            echo $LD_LIBRARY_PATH
+            ./startSingleTest.sh ReadingTablesTS.*
+
+      - name: Execute app
+        run: |
+            mkdir -p dbs
+            cd Launchers
+            export LD_LIBRARY_PATH=${{ github.workspace }}/.local/lib/:${{ github.workspace }}/.local/instantclient_23_9:$LD_LIBRARY_PATH
+            ./startApp.sh
+
+      - name: Check for app execution result
+        run: ls -l dbs/hr.db
+
+      - name: Upload the resulting SQLlite database
+        uses: actions/upload-artifact@v4
+        with: 
+            name: HR SQLlite
+            path: dbs
